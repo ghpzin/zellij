@@ -32,15 +32,14 @@ pub fn render_tab(
         ThemeHue::Light => palette.black,
     };
     let background_color = if tab.active {
-        palette.green
-    } else if is_alternate_tab {
-        alternate_tab_color
+        palette.fg
+    } else {
+        palette.bg
+    };
+    let foreground_color = if tab.active {
+        palette.bg
     } else {
         palette.fg
-    };
-    let foreground_color = match palette.theme_hue {
-        ThemeHue::Dark => palette.black,
-        ThemeHue::Light => palette.white,
     };
     let left_separator = style!(foreground_color, background_color).paint(separator);
     let mut tab_text_len = text.width() + (separator_width * 2) + 2; // + 2 for padding
